@@ -1,0 +1,77 @@
+<meu-cabecalho ></meu-cabecalho>
+<h1 class="text-center">Novo Ticket</h1>
+
+<uib-alert ng-show="mensagem.msg" type="{{mensagem.type}}">{{mensagem.msg}}</uib-alert>
+
+
+<form name="eventForm" class="form-group" ng-init="logado()">
+  <div class="col-xs-12">
+    <div class="col-xs-8">
+      <label for="titulo">Título</label>
+      <input type="text" class="form-control" id="titulo" ng-model="ticket.atividade" required>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="col-xs-4">
+      <label for="owner">Analista responsável</label>
+      <select class="form-control" ng-controller="UsersController" ng-model="ticket.responsavel" ng-change="ticket.evento.fila = ticket.responsavel">
+      <option value="{{user.nome}}" id="" ng-repeat="user in users | filter : filtroAdmin ">{{user.nome}}</option>
+      </select>
+      
+    </div>
+    <div class="col-xs-3">
+      <label for="prioridade"> Prioridade</label>
+      <select class="form-control" name="prioridade" id="ticket.prioridade" ng-model="ticket.prioridade">
+        <option value="Baixa">Baixa</option>
+        <option value="Media">Media</option>
+        <option value="Alta">Alta</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="col-xs-8" data-html="true">
+      <label for="Atividade">Descrição da Atividade</label>
+      <textarea class="form-control" rows="4" ng-model="ticket.evento.descricao" id="evento" required></textarea>
+    </div>
+  </div>
+
+  <div class="col-xs-12">
+    <div class="col-xs-4">
+      <label for="status">Status: </label>
+      <select class="form-control" ng-model="ticket.evento.status" id="status" required>
+    <option value="Iniciado">Iniciado</option>
+    <option value="Em tratamento">Em Tratamento</option>
+    <option value="Finalizado">Finalizado</option>
+  </select>
+    </div>
+  </div>
+
+
+    <div class="col-xs-12" style="padding-top: 20px;">
+      
+      <div class="col-xs-3">
+      <!--<label for="previsao">Data de Inicio</label>-->
+      <md-datepicker ng-model="dtcria" md-placeholder="Início" ng-change="ticket.dtInicio = dtcria.toISOString()"></md-datepicker>
+      </div>
+      <div class="col-xs-3">
+      <!--<label for="previsao" style="text-align: center;">Previsão</label>-->
+      <md-datepicker ng-model="dtprev" md-placeholder="Previsão" ng-change="ticket.dtPrev =dtprev.toISOString()" ng-required></md-datepicker>
+      </div>
+    </div>
+    
+  <meu-upload class="col-xs-8" style="padding-left : 30px;"></meu-upload>
+  <div class="col-xs-12" style="padding-top : 20px;margin-bottom : 100px;">
+   
+      <a ng-href="/" class="btn btn-warning btn-sm navbar-right">Voltar</a>
+      <button ng-click="salva()" name="name" value="Cadastrar"  class="btn btn-success btn-sm navbar-left" id="enviar" ng-hide="finalizado()">Cadastrar</button>
+ 
+  </div>
+  
+</form>
+
+
+
+<!-- <blockquote ng-repeat="evento in ticket.evento">
+  <cite>{{evento.descricao}}</cite>
+  <p>{{evento.status}}</p>
+</blockquote> -->

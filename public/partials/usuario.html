@@ -1,0 +1,38 @@
+<meu-cabecalho></meu-cabecalho>
+
+
+
+<h3 class="text-center">Informações de Usuário</h3>
+
+<div class="col-xs-4 col-xs-offset-4">
+    <div class="alert alert-warning alert-dismissible" role="alert" ng-show="mensagem.texto">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+   {{mensagem.texto}}
+</div>
+<form name="usuario">
+    <label for="">Login</label>
+    <div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">@</span>
+    <input type="text" ng-model="user.login" class="form-control" aria-describedby="basic-addon1">
+    </div>
+    <label for="">Nome</label>
+    <input type="text" ng-model="user.nome" class="form-control">
+    <label for="">Atualizar Senha</label>
+    <input type="password"  class="form-control"  ng-model="pass1" name="pass1" id="pass1" required>
+    <label for="">Confirme sua senha</label>
+    <input type="password" ng-model="novaSenha" ng-change="user.senha = novaSenha" class="form-control" pw-check="pass1" name="pass2" id="pass2" required>
+    <div class="alert alert-danger" role="alert" ng-show="usuario.pass2.$error.pwmatch">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        Senhas não são idênticas
+    </div>
+    <input type="button" value="Salvar" ng-click="salvaUsuario()" class="btn btn-default center-block" style="margin-top: 20px;">
+    
+</form>
+</div>
+<div class="col-xs-12 ">
+    <div class="col-xs-offset-4 center-block"></div>
+    <a ng-href="/" class="btn btn-warning btn-sm navbar-right">Voltar</a>
+<a ng-href="/users"  class="btn btn-primary btn-sm navbar-left">Gerenciar Usuarios</a></div>
+</div>
+</div>

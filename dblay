@@ -1,0 +1,57 @@
+ var ticket [{
+   _id:1,
+   titulo : "Erro Sincronismo Caixa 3P",
+   tipo : "Servidores",
+   ocorrencia: "Falha",
+   owner: "Thadeu",
+   ticket: "",
+
+   evento : [
+     {
+       owner: "Thadeu Cotts"
+       status: "Em tratamento",
+       data: "01/01/2016",
+       descricao: "Foram recriadas as configurações do serviço DHCP no servidor",
+     },
+     {
+       owner: "Gabriel Rodrigo"
+       status: "Em tratamento",
+       data: "10/04/2016",
+       descricao: "Realizados testes de sincronismo, porém terminal continua apresentando falha",
+     },
+     {
+       owner: "Thadeu Cotts"
+       status: "Finalizado",
+       data: "30/05/2016",
+       descricao: "Atualizado firmware e recriada profile",
+     }
+   ]
+
+ },
+
+ {
+   _id:2,
+   titulo : "Comutação FLNDTCCMT01",
+   tipo : "CMTS",
+   ocorrencia: "Intermitência",
+   owner: "Geison",
+   ticket: "",
+
+   evento : [
+     {
+       owner: "Mario"
+       status: "Em tratamento",
+       data: "01/01/2016",
+       descricao: "Enviados Logs Engenharia",
+     },
+     {
+       owner: "Geison"
+       status: "Finalizado",
+       data: "10/04/2016",
+       descricao: "Trocada Placa DCAM",
+     }
+
+   ]
+
+ }
+ ]

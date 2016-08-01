@@ -1,0 +1,24 @@
+<meu-cabecalho></meu-cabecalho>
+<div ng-show="isAdmin()">
+
+<div class=" col-xs-4 col-xs-offset-4">
+    <h3>Usuários</h3>
+<table class="table table-hover" ng-controller="UsersController">
+    <tr>
+        <td>Adicionar Usuário <a ng-href="/newuser"><span class="glyphicon glyphicon-plus-sign"></span></a></td>
+    </tr>
+    <tr>
+    <th>Login</th>
+    <th>Nome</th>
+    <th></th>
+    </tr> 
+    <tr ng-repeat="user in users">
+        <td ng-click="goUser(user._id)">{{user.login}}</td>
+        <td ng-click="goUser(user._id)">{{user.nome}}</td>
+        <td><button class="btn-xs btn-danger" ng-click="removeUsuario(user)"><span class="glyphicon glyphicon-remove-sign"></span></button>
+</td>
+    </tr>
+</table>
+ <button class="btn btn-warning btn-sm navbar-right" ng-click="voltar()">Voltar</button>
+</div>
+</div>

@@ -1,0 +1,132 @@
+<meu-cabecalho ></meu-cabecalho>
+<div class="container-fluid">
+  <h2 class="text-center">
+  Ticket {{ticket._id}}
+</h2>
+
+ <div class="alert alert-warning alert-dismissible" role="alert" ng-show="mensagem.texto">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+   {{mensagem.texto}}
+</div>
+
+<div class="table-responsive" ng-init="logado()">
+  <table class="table table-hover">
+    <tr class="active">
+      <th>Supervisor</th>
+      <th>Data de Início</th>
+      <th>Atividade</th>
+      <th>Em Atuação</th>
+      <th>Status</th>
+      <th>Previsão</th>
+      <th>Prioridade</th>
+    </tr>
+    <tr class="{{prioBg(ticket.prioridade)}}">
+      <td>{{ticket.criador}}</td>
+      <td>{{ticket.dtInicio | date : "dd 'de' MMM 'de' yyyy"}}</td>
+      <td>{{ticket.atividade}}</td>
+      <td ng-repeat="evento in ticket.evento" ng-if="$last">{{evento.fila}}</td>
+      <td ng-repeat="evento in ticket.evento" ng-if="$last" id="estado">{{evento.status}}</td>
+      <td>{{ticket.dtPrev | date : "dd 'de' MMM 'de' yyyy"}}</td>
+      <td class="text-center">
+      {{ticket.prioridade}}
+      </td>
+    </tr>
+  </table>
+<hr>
+</div>
+
+<section ng-repeat="evento in ticket.evento " class="panel panel-info">
+  <textarea name="name" class="form-control" rows="2" disabled>{{evento.descricao}}</textarea>
+  <p class="panel panel-heading" style="margin-bottom : 0px;">{{evento.status}} por {{evento.por}} em {{evento.data | date : "dd 'de' MMM 'de' yyyy  'às' HH:mm "}}</p>
+  
+  <button class="btn btn-info btn-xs" role="button" data-toggle="collapse" href="#{{evento._id}}" aria-expanded="false" aria-controls="collapseExample" ng-show="evento.anexo.length > 0" style="margin-top : 0px;">
+  <span class="glyphicon glyphicon-file"></span> <span class="badge">{{evento.anexo.length}}</span>
+</button>
+  <div class="panel-body collapse" id="{{evento._id}}" >
+    <ul ng-repeat="anexo in evento.anexo" class="list-inline">
+      <li><a href="uploads/{{anexo}}" target="_self"">{{anexo}}</a></li>
+      
+    </ul>
+    <hr>
+  </div>
+
+</section>
+
+<form action="" name="atualiza" class="form-group" style="padding-top: 40px;">
+  
+  <div ng-hide="finalizado()">
+    <hr>
+  <label for="evento">Evento</label>
+  <textarea class="form-control" rows="3" ng-model="evento.descricao" id="evento" required></textarea>
+  <!--Upload de Arquivo-->
+
+  <div class="col-xs-12 text-left" style="padding-left:0px; padding-top: 20px;">
+    <div class="col-xs-3" style="padding-left:0px;">
+      <label for="status">Status: </label>
+      <select class="form-control" ng-model="evento.status">
+    <option value="Em tratamento">Em Tratamento</option>
+    <option value="Finalizado">Finalizado</option>
+  </select>
+    </div>
+  
+  <div class="col-xs-4">
+      <label for="owner">Trocar Fila</label>
+      <select class="form-control" ng-controller="UsersController" ng-model="evento.fila">
+      <option value="{{user.nome}}" id="" ng-repeat="user in users | filter : filtroAdmin ">{{user.nome}}</option>
+      </select>
+      
+    </div>
+    </div>
+  </div>
+   
+
+    <meu-upload ng-hide="finalizado()"></meu-upload>
+    <div style="margin-bottom: 100px;" class="col-xs-12">
+      <button class="btn btn-warning btn-sm navbar-right" ng-click="voltar()">Voltar</button>
+      <input type="button" ng-click="addEvento();" name="name" value="Enviar" class="btn btn-success btn-sm navbar-left" id="enviar"
+        ng-hide="finalizado()">
+    </div>
+</form>
+
+
+</div>
+
+
+<script>
+
+  $(".file").fileinput(
+    {
+      
+      overwriteInitial: false,
+      showUpload: false, 
+      
+      showZoom : false,
+      showDelete: true,
+      uploadClass: "btn btn-info",
+      uploadTitle: "Teste",
+      removeClass: "btn btn-danger",
+      removeLabel: "Delete",
+      layoutTemplates: {
+            main1: "{preview}\n" +
+            "<div class=\'input-group {class}\'>\n" +
+            "   <div class=\'input-group-btn\'>\n" +
+            "       {browse}\n" +
+            "       {remove}\n" +
+            "   </div>\n" +
+            "   {caption}\n" +
+            "</div>"
+        }
+      
+        
+    }
+    );
+</script>
+
+<style>
+  th,td {
+    text-align: center;
+  }
+  li {
+    text-decoration: none;
+  }
+</style>

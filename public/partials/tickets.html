@@ -1,0 +1,159 @@
+<meu-cabecalho></meu-cabecalho>
+
+<div class="jumbotron">
+  <p ng-show="mensagem.texto">
+    {{mensagem.texto}}
+  </p>
+  <h2 class="text-center">
+    Tickets Datacenter
+  </h2>
+
+  <div class="table-responsive">
+   
+    <div class="col-xs-12" style="padding-top : 10px; text-align: center;">
+      <!--<uib-accordion >
+        <div uib-accordion-group class="panel-default" is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+          <uib-accordion-heading>
+            Opções <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isFirstOpen, 'glyphicon-chevron-right': !status.isFirstOpen}"></i>
+          </uib-accordion-heading>-->
+
+            <div class="btn-group">
+        <a class="btn btn-primary" ng-href="/novo">Novo Ticket</a>
+        <button class="btn btn-primary" ng-model="miTy.cri" btn-checkbox-false="''" btn-checkbox-true="'{{logged.nome}}'" uib-btn-checkbox>Minha Supervisão</button>
+        <button class="btn btn-primary" ng-model="miTy.sin" uib-btn-checkbox btn-checkbox-false="''" btn-checkbox-true="'{{logged.nome}}'"  uib-btn-checkbox>Minha Fila</button>
+        <button class="btn btn-primary" ng-model="isClosed" uib-btn-checkbox btn-checkbox-true="''" btn-checkbox-false="'!Finalizado'" uib-btn-checkbox>Exibir Fechados</button>
+        
+    </div>
+         
+           <!--<label for="" class="navbar-right">Exibir somente meus tickets 
+             </label>
+             <input type="checkbox" ng-model="miTY" ng-change="checar(miTY)" ng-true-value="'{{logged.nome}}'" ng-false-value="''"
+               class="navbar-right">
+           </div>-->
+
+
+          
+
+
+          <!--<label for="" class="navbar-right">Exibir somente meus tickets </label><input type="checkbox" ng-model="myTickets.val" 
+            ng-change="myTickets.val = logged.nome"  ng-true-value="true" ng-false-value="false" class="navbar-right">
+            </div>-->
+          <!--<div class="col-xs-12" style="padding-bottom : 5px;">
+          <label for="" class="navbar-right">Exibir Tickets Finalizados </label><input type="checkbox" ng-model="isClosed.check"
+            ng-true-value="''" ng-false-value="'!Finalizado'" class="navbar-right">
+            </div>-->
+         
+  </div>
+        <!--</uib-accordion>-->
+          <!--</div>
+          <a ng-href="/novo" class="btn btn-primary btn-sm navbar-left">Novo Ticket</a>
+      
+
+        <form action="" class="form-group">
+          <!--<a ng-href="/novo" class="btn btn-primary btn-sm navbar-left">Novo Ticket</a>
+          <label for="" class="navbar-right">Exibir Tickets Finalizados </label><input type="checkbox" ng-model="isClosed"
+            ng-true-value="''" ng-false-value="'!Finalizado'" class="navbar-right">
+        </form>-->
+
+    </div>
+    <hr>
+    <table class="table table-hover">
+      <tr>
+        <th><a ng-click="sort('_id')">Ticket
+        <span ng-show="sortKey=='_id'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            
+        </a></th>
+        <th><a href="#" ng-click="sort('criador')">Supervisor
+        <span ng-show="sortKey=='criador'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+           
+        </a></th>
+        <th> <a href="#" ng-click="sort('dtInicio')">Data de Início
+        <span ng-show="sortKey=='dtInicio'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            
+        </a></th>
+        <th> <a href="#" ng-click="sort('atividade')">Atividade
+        <span ng-show="sortKey=='atividade'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            
+        </a></th>
+        <th>
+          <a href="#" ng-click="sort('responsavel')">Em Atuação
+        <span ng-show="sortKey=='responsavel'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            
+        </a></th>
+        <th><a href="#" ng-click="sort('status')">Status
+        <span ng-show="sortKey=='status'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            
+        </a></th>
+        <th><a href="#" ng-click="sort('dtPrev')">Previsão
+        <span ng-show="sortKey=='dtPrev'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            
+        </a></th>
+        <th><a href="#" ng-click="sort('prioridade')">Prioridade
+        <span ng-show="sortKey=='prioridade'" class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+           
+        </a></th>
+      </tr>
+      <tr dir-paginate="ticket in tickets | orderBy:sortKey:reverse  |  filter:  isClosed | filter : {criador : miTy.cri} | filter : {responsavel : miTy.sin}  |itemsPerPage:porPag.num" ng-click="goTicket(ticket._id)"
+        class="{{prioBg(ticket.prioridade)}}">
+      <!--<tr dir-paginate="ticket in tickets |orderBy:sortKey:reverse  |  filter: isClosed.check | filter : {criador : myTickets.val} |itemsPerPage:porPag.num" ng-click="goTicket(ticket._id)"
+        class="{{prioBg(ticket.prioridade)}}">-->
+        <td>{{ticket._id}}</td>
+        <td>{{ticket.criador}}</td>
+        <td>{{ticket.dtInicio | date : 'dd-MM-yy'}}</td>
+        <td>{{ticket.atividade}}</td>
+        <td>
+          {{ticket.responsavel}}
+        </td>
+        <td ng-repeat="evento in ticket.evento track by $index" ng-show="$last">
+          {{evento.status}}
+        </td>
+        <td>{{ticket.dtPrev | date : 'dd-MM-yy'}}</td>
+        <td>{{ticket.prioridade}}</td>
+      </tr>
+      <tr>
+
+      </tr>
+    </table>
+    <div style="padding-right: 100px;">
+      <dir-pagination-controls class="pagination-sm navbar-right" max-size="5" direction-links="true" boundary-links="true">
+      </dir-pagination-controls>
+    </div>
+    <!--<uib-pagination total-items="totalItems" data-num-pages="numPages" max-size="maxSize" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm navbar-right" items-per-page="itemsPerPage" boundary-links="true" force-ellipses="true"></uib-pagination>
+   -->
+   
+  
+  <!--<button ng-click="linhas()">Lista</button>-->
+</div>
+ <div class="navbar-right col-xs-8" style="padding-right: 15px;">
+           
+            <div class="col-xs-1 navbar-right">
+            <select name="itens" id="" ng-model="porPag.num" class="form-control input-sm">
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="60">60</option>
+    </select>
+     
+  </div>
+ <label for="itens" class="navbar-right">Tickets por página</label>
+  </div>
+</div>
+<style>
+  th,
+  td {
+    text-align: center;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  a:hover,
+  a:focus,
+  a:visited {
+    text-decoration: none;
+  }
+</style>

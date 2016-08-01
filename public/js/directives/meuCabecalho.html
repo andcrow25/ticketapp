@@ -1,0 +1,6 @@
+<div class="col-xs-12" ng-controller="TicketController" ng-init="logado()" ng-show="logged">
+    
+    <div class="navbar-right btn-sm btn-info" title="Sair" ng-click="sair()"><span class="glyphicon glyphicon-log-out" ></span></div>
+    <div class="navbar-right btn-sm btn-default" title="Configurar" ng-controller="UsersController" ng-click="goUser(logged._id)" ><span class="glyphicon glyphicon-cog" ></span></div>
+    <h4 class="navbar-right" style="padding-right: 10px;">Logado Como {{logged.nome}}</h4>
+</div>
